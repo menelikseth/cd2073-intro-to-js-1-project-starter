@@ -8,6 +8,31 @@
    - productId: unique id for the product (number)
    - image: picture of product (url string)
 */
+const cherry = {
+  name: 'cherry',
+  price: 1.25,
+  quantity: 0,
+  productId: 101,
+  image: '../images/cherry.jpg'
+}
+
+const orange = {
+  name: 'orange',
+  price: 2.25,
+  quantity: 0,
+  productId: 102,
+  image: '../images/orange.jpg'
+}
+
+const strawberry = {
+  name: 'strawberry',
+  price: 1.25,
+  quantity: 0,
+  productId: 103,
+  image: '../images/strawberry.jpg'
+}
+
+const products = [cherry,orange,strawberry];
 
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
