@@ -1,5 +1,7 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
 
+let products;
+
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
    - name: name of product (string)
@@ -8,6 +10,7 @@
    - productId: unique id for the product (number)
    - image: picture of product (url string)
 */
+
 const cherries = {
   name: 'cherry',
   price: 1.25,
@@ -32,7 +35,7 @@ const strawberries = {
   image: '../images/strawberry.jpg'
 }
 
-const products = [cherries, oranges, strawberries];
+products = [cherries, oranges, strawberries];
 
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
@@ -122,7 +125,7 @@ function removeProductFromCart(productId) {
   - cartTotal should iterate through the cart to get the total of all products
   - cartTotal should return the sum of the products in the cart
 */
-var totalPaid = 0;
+let totalPaid = 0;
 
 function cartTotal() {
   let total = 0;
@@ -149,17 +152,11 @@ function pay(amount) {
   let balance = totalPaid - cartTotal();
   if (balance >= 0) {
     emptyCart();
-    /* copied from front.js to improve user experience*/
-    drawCart();
-    drawCheckout();
-    document.querySelector('.received').value = '';
-    /* end copied from front.js */
     totalPaid = 0;
   }
   return balance;
 }
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
-
 
 /* The following is for running unit tests. 
    To fully complete this project, it is expected that all tests pass.
