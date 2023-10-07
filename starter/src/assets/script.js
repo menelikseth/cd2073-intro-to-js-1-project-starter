@@ -1,7 +1,5 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
 
-let products;
-
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
    - name: name of product (string)
@@ -35,7 +33,7 @@ const strawberries = {
   image: '../images/strawberry.jpg'
 }
 
-products = [cherries, oranges, strawberries];
+const products = [cherries, oranges, strawberries];
 
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
@@ -47,6 +45,20 @@ products = [cherries, oranges, strawberries];
 
 const cart = [];
 
+/* Create a function named increaseQuantity that takes in the productId as an argument
+  - increaseQuantity should get the correct product based on the productId
+  - increaseQuantity should then increase the product's quantity
+*/
+
+function increaseQuantity(productId) {
+  for (const product of products) {
+    if (product.productId === productId) {
+      product.quantity++;
+      return (product);
+    }
+  }
+}
+
 /* Create a function named addProductToCart that takes in the product productId as an argument
   - addProductToCart should get the correct product based on the productId
   - addProductToCart should then increase the product's quantity
@@ -54,27 +66,26 @@ const cart = [];
 */
 
 function addProductToCart(productId) {
-  for (let product of products) {
-    if (product.productId === productId) {
-      product.quantity++;
-      if (!cart.includes(product)) {
-        cart.push(product);
-      }
-    }
-
-  }
+  const product = increaseQuantity(productId);
+  if (!cart.includes(product))
+    cart.push(product);
 }
 
-/* Create a function named increaseQuantity that takes in the productId as an argument
-  - increaseQuantity should get the correct product based on the productId
-  - increaseQuantity should then increase the product's quantity
+/* Create a function named removeProductFromCart that takes in the productId as an argument
+  - removeProductFromCart should get the correct product based on the productId
+  - removeProductFromCart should update the product quantity to 0
+  - removeProductFromCart should remove the product from the cart
 */
 
-function increaseQuantity(productId) {
-  for (let product of cart) {
-    if (product.productId === productId) {
-      product.quantity++;
-    }
+function removeProductFromCart(productId) {
+  const index = cart.findIndex(
+    product => {
+      return product.productId === productId;
+    });
+
+  if (index != -1) {
+    cart[index].quantity = 0;
+    cart.splice(index, 1);
   }
 }
 
@@ -85,38 +96,11 @@ function increaseQuantity(productId) {
 */
 
 function decreaseQuantity(productId) {
-  for (let product of cart) {
+  for (const product of cart) {
     if (product.productId === productId) {
       product.quantity--;
-
-      if (product.quantity === 0) {
-        const index = cart.findIndex(function (product) {
-          if (product.id === productId)
-            return product;
-        });
-
-        cart.splice(index, 1);
-      }
-    }
-  }
-}
-
-/* Create a function named removeProductFromCart that takes in the productId as an argument
-  - removeProductFromCart should get the correct product based on the productId
-  - removeProductFromCart should update the product quantity to 0
-  - removeProductFromCart should remove the product from the cart
-*/
-
-function removeProductFromCart(productId) {
-  for (let product of cart) {
-    if (product.productId === productId) {
-      const index = cart.findIndex(function (product) {
-        if (product.id === productId)
-          return product;
-      });
-      if (product.quantity > 0)
-        product.quantity = 0;
-      cart.splice(index, 1);
+      if (product.quantity === 0)
+        removeProductFromCart(productId);
     }
   }
 }
@@ -129,7 +113,7 @@ let totalPaid = 0;
 
 function cartTotal() {
   let total = 0;
-  for (let product of cart) {
+  for (const product of cart) {
     total += (product.quantity * product.price);
   }
   return total;
@@ -137,7 +121,7 @@ function cartTotal() {
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart() {
   if (cart.length > 0) {
-    for (let product of cart) {
+    for (const product of cart) {
       product.quantity = 0;
     }
     cart.length = 0;
@@ -149,7 +133,7 @@ function emptyCart() {
 */
 function pay(amount) {
   totalPaid += amount;
-  let balance = totalPaid - cartTotal();
+  const balance = totalPaid - cartTotal();
   if (balance >= 0) {
     emptyCart();
     totalPaid = 0;
